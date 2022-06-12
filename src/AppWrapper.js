@@ -1,43 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import useAuth from "./utils/authFunctions";
-import MainWrapper from "./components/layout/MainWrapper";
-import ScrollIntoView from "./utils/ScrollIntoView";
-import LoginPage from "./pages/landing/LoginPage";
-//import Register from "./pages/register/Register";
+import React, { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Header from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
+import Homepage from "./pages/home/Homepage";
+import Login from "./pages/landing/LoginPage";
+import Register from "./pages/register/Register";
+
+import ScrollToTop from "./utils/utils";
+import { GetRefreshToken } from "./store/actions/authActions";
+import AdminWrapper from "./AdminWrapper";
 
 const AppWrapper = () => {
   const dispatch = useDispatch();
-  const { authed, timeout } = useAuth();
 
-  function RequireAuth({ children }) {
-    return authed === true ? children : <Navigate to="/" replace />;
-  }
+  const getData = async () => {
+    dispatch(GetRefreshToken());
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
-    <ScrollIntoView>
-      <div className={`h-screen w-full  overflow-hidden bg-faded-gray`}>
-        <Routes>
-          <Route path="/" exact element={<LoginPage />} />
-          {/* <Route exact path="/register" element={<Register />} /> */}
+    <>
+      <Header className="display-block"></Header>
 
-          <Route
-            path="/home/*"
-            element={
-              //<RequireAuth>
-              <MainWrapper />
-              //</RequireAuth>
-            }
-          ></Route>
+      <div className="pt-12">
+        <Routes>
+          <Route path="/">
+            <Route index element={<Homepage />}></Route>
+            {/* ////////////////////////////Auth Pages //////////////////////////////////*/}
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+
+            {/* ////////////////////////////Admin Pages //////////////////////////////////*/}
+            <Route
+              path="admin/*"
+              element={<AdminWrapper></AdminWrapper>}
+            ></Route>
+          </Route>
         </Routes>
-        {/* 
-        <TimeoutModal
-          showModal={showModal}
-          closeModal={closeModal}
-        ></TimeoutModal> */}
       </div>
-    </ScrollIntoView>
+      <Footer></Footer>
+    </>
   );
 };
 
