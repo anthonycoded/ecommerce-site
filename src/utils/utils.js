@@ -94,3 +94,28 @@ export const OrderTiles = (accounts, order) => {
   }
   return array;
 };
+
+export const onChange = (e, selectImage) => {
+  const imageFile = e.target.files[0];
+  const reader = new FileReader();
+
+  let allowedExtensions =
+    /(\.doc|\.docm|\.dotm|\.docx|\.odt|\.txt|\.rtf|\.pdf|\.png|\.jpeg|\.jpg)$/;
+
+  if (!imageFile?.name?.toLowerCase().match(allowedExtensions)) {
+    setError(
+      `Please select valid file type. ".${
+        imageFile?.name.split(".")[1]
+      }" is not supported`
+    );
+    setShowError(true);
+    return false;
+  } else {
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        selectImage(reader.result.split(",")[1]);
+      }
+    };
+    reader.readAsDataURL(e.target.files[0]);
+  }
+};
