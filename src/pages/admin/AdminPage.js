@@ -12,9 +12,9 @@ const AdminPage = () => {
     <div>
       <div className="w-full h-full flex flex-col items-center p-2 pb-12 md:p-0 bg-gray-300">
         <p className="text-2xl  text-left w-full  lg:p-4">
-          Welcome back admin!
+          Welcome back admin.
         </p>
-        <div className="w-full h-96 lg:h-60 py-12 px-4 grid grid-cols-2 gap-4 lg:flex lg:flex-row lg:justify-between lg:px-8">
+        <div className="w-full lg:px-24 h-96 lg:h-60 py-12 px-4 grid grid-cols-2 gap-4 lg:flex lg:flex-row lg:justify-between ">
           <Link
             to="/admin/dashboard"
             className="w-full h-full flex flex-col justify-center items-center p-4 rounded-lg shadow-lg hover:bg-primary bg-primary-light"
@@ -44,6 +44,7 @@ const AdminPage = () => {
             <p className="font-semibold text-lg">Customers</p>
           </Link>
         </div>
+        <div className="h-110"></div>
       </div>
     </div>
   );
