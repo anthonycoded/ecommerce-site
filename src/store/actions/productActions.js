@@ -1,6 +1,6 @@
-import HandleError from "../../functions/ErrorHandler";
-import { GetRequest, PostRequest, DeleteRequest } from "../../../ApiCalls";
-const Global = require("../../../Global.js");
+import HandleError from "../../utils/ErrorHandler";
+import { GetRequest, PostRequest, DeleteRequest } from "../../utils/ApiCalls";
+const Global = require("../../utils/Global");
 
 const Get_All_Products = "Get_All_Products";
 const Publish_Product = "Publish_Product";
