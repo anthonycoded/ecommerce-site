@@ -1,6 +1,6 @@
 const blueShirt = require("../../../assets/blueShirt.png");
 const yellowShirt = require("../../../assets/yellowHoodie.png");
-const red = require("../../../assets/red.jpeg");
+const red = require("../../../assets/red.jpg");
 
 const initialState = {
   status: false,
@@ -172,7 +172,7 @@ const initialState = {
 
 const Get_Products = "Get_Products";
 
-export const productsReducer = (state = initialState, action) => {
+export const productReducer = (state = initialState, action) => {
   switch (action.type) {
     case Get_Products:
       return state;
